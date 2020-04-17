@@ -46,6 +46,11 @@ export default function Home(props) {
     }
   };
 
+  const handleClear = () => {
+    setTodos([]);
+    storeData(JSON.stringify([]));
+  };
+
   const storeData = async (value) => {
     try {
       await AsyncStorage.setItem(KEY, value);
@@ -118,7 +123,7 @@ export default function Home(props) {
         {Loading ? (
           <View
             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <ActivityIndicator size="large" color={Colors.themeBLue}/>
+            <ActivityIndicator size="large" color={Colors.themeBLue} />
           </View>
         ) : (
           <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -128,7 +133,7 @@ export default function Home(props) {
                   flex: 1,
                 }}>
                 <View style={{flex: 1, alignItems: 'center'}}>
-                  <View style={{height: '70%', width: '100%'}}>
+                  <View style={{height: '80%', width: '100%'}}>
                     <LottieAnimation file={LottieFile.TaskHome} />
                   </View>
                   <TextComponent type={FontType.BOLD}>
@@ -157,9 +162,11 @@ export default function Home(props) {
       {
         <View style={styles.ButtonContainer}>
           <AddTask
+            handleClear={handleClear}
             handleAddTodo={handleAddTodo}
             pic="plus"
             toggleModal={toggleModal}
+            list={todos}
           />
         </View>
       }

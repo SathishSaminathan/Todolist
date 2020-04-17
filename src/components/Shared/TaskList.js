@@ -10,8 +10,8 @@ import {IconType} from '../../constants/AppConstants';
 const Task = ({navigation, data, list, handleTodoCompleted, handleRemove}) => (
   <View style={styles.taskWrapper}>
     <TouchableOpacity
-      activeOpacity={0.5}
-      onPress={() => navigation.navigate('TaskDetails')}
+      activeOpacity={1}
+      // onPress={() => navigation.navigate('TaskDetails')}
       style={{flex: 1}}>
       <View style={{flexDirection: 'row', flex: 1}}>
         <View

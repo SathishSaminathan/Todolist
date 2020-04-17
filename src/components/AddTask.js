@@ -13,7 +13,7 @@ import TextComponent from './Shared/TextComponent';
 import TextInputComponent from './Shared/TextInputComponent';
 import {FontType} from '../constants/AppConstants';
 
-export default ({pic, handleAddTodo, toggleModal}) => {
+export default ({pic, handleAddTodo, toggleModal, handleClear, list}) => {
   const [modal, setModal] = useState(false);
   const [value, setValue] = useState('');
 
@@ -65,24 +65,39 @@ export default ({pic, handleAddTodo, toggleModal}) => {
             />
           </KeyboardAvoidingView>
           <View style={{flex: 1}} />
-          <TouchableOpacity
-            disabled={!value}
-            onPress={() => {
-              handleClose();
-              handleAddTodo(value);
-            }}
-            style={styles.btnBottom}>
-            <View style={styles.Text}>
-              <TextComponent
-                type={FontType.BOLD}
-                style={[
-                  styles.textSave,
-                  {color: value ? '#1070de' : 'lightgrey'},
-                ]}>
-                Save
-              </TextComponent>
-            </View>
-          </TouchableOpacity>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <TouchableOpacity
+              disabled={list.length === 0}
+              onPress={handleClear}
+              style={styles.btnBottom}>
+              <View style={styles.Text}>
+                <TextComponent type={FontType.BOLD} style={[
+                    styles.textSave,
+                    {color: list.length !== 0 ? '#1070de' : 'lightgrey'},
+                  ]}>
+                  Clear all
+                </TextComponent>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              disabled={!value}
+              onPress={() => {
+                handleClose();
+                handleAddTodo(value);
+              }}
+              style={styles.btnBottom}>
+              <View style={styles.Text}>
+                <TextComponent
+                  type={FontType.BOLD}
+                  style={[
+                    styles.textSave,
+                    {color: value ? '#1070de' : 'lightgrey'},
+                  ]}>
+                  Save
+                </TextComponent>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
     </View>
