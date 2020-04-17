@@ -29,6 +29,9 @@ export default function Home(props) {
 
   useEffect(() => {
     getData();
+    setInterval(() => {
+      getData();
+    }, 60000);
   }, []);
 
   const getData = async () => {

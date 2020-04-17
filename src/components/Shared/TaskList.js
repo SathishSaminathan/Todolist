@@ -30,7 +30,10 @@ const Task = ({navigation, data, list, handleTodoCompleted, handleRemove}) => (
                   ? 'check-circle-outline'
                   : 'checkbox-blank-circle-outline'
               }
-              style={{fontSize: 25, color: Colors.themeBlack}}
+              style={{
+                fontSize: 25,
+                color: data.completed ? Colors.themeBlack : Colors.searchText,
+              }}
             />
           </TouchableOpacity>
         </View>
