@@ -5,7 +5,7 @@ import {
   Button,
   TouchableOpacity,
   StyleSheet,
-  TextInput,
+  ActivityIndicator,
   ScrollView,
   StatusBar,
 } from 'react-native';
@@ -25,6 +25,7 @@ const KEY = 'TODO';
 export default function Home(props) {
   const [todos, setTodos] = useState([]);
   const [ModalVisible, setModalVisible] = useState(false);
+  const [Loading, setLoading] = useState(true);
 
   useEffect(() => {
     getData();
@@ -34,10 +35,11 @@ export default function Home(props) {
     try {
       const value = await AsyncStorage.getItem(KEY);
       if (value) {
-        console.log(value);
         setTodos(JSON.parse(value));
+        setLoading(false);
       } else {
-        console.log('value');
+        setLoading(false);
+        // console.log('value');
       }
     } catch (e) {
       // error reading value
@@ -113,37 +115,44 @@ export default function Home(props) {
         My Tasks
       </TextComponent>
       <View style={{flex: 1}}>
-        <ScrollView contentContainerStyle={{flexGrow: 1}}>
-          {todos.length === 0 ? (
-            <View
-              style={{
-                flex: 1,
-              }}>
-              <View style={{flex: 1, alignItems: 'center'}}>
-                <View style={{height: '70%', width: '100%'}}>
-                  <LottieAnimation file={LottieFile.TaskHome} />
+        {Loading ? (
+          <View
+            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <ActivityIndicator size="large" color={Colors.themeBLue}/>
+          </View>
+        ) : (
+          <ScrollView contentContainerStyle={{flexGrow: 1}}>
+            {todos.length === 0 ? (
+              <View
+                style={{
+                  flex: 1,
+                }}>
+                <View style={{flex: 1, alignItems: 'center'}}>
+                  <View style={{height: '70%', width: '100%'}}>
+                    <LottieAnimation file={LottieFile.TaskHome} />
+                  </View>
+                  <TextComponent type={FontType.BOLD}>
+                    A fresh start
+                  </TextComponent>
+                  <TextComponent style={{color: Colors.textBlack}}>
+                    Anything to add?
+                  </TextComponent>
                 </View>
-                <TextComponent type={FontType.BOLD}>
-                  A fresh start
-                </TextComponent>
-                <TextComponent style={{color: Colors.textBlack}}>
-                  Anything to add?
-                </TextComponent>
               </View>
-            </View>
-          ) : (
-            todos.map((data, i) => (
-              <TaskList
-                data={data}
-                key={i}
-                {...props}
-                handleRemove={handleRemove}
-                handleTodoCompleted={handleTodoCompleted}
-                list={todos}
-              />
-            ))
-          )}
-        </ScrollView>
+            ) : (
+              todos.map((data, i) => (
+                <TaskList
+                  data={data}
+                  key={i}
+                  {...props}
+                  handleRemove={handleRemove}
+                  handleTodoCompleted={handleTodoCompleted}
+                  list={todos}
+                />
+              ))
+            )}
+          </ScrollView>
+        )}
       </View>
       {
         <View style={styles.ButtonContainer}>
