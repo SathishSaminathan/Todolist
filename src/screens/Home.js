@@ -68,7 +68,7 @@ export default function Home(props) {
       storeData(
         JSON.stringify([
           ...todos,
-          {todo: value, completed: true, time: moment()},
+          {todo: value, completed: false, time: moment()},
         ]),
       );
     }
