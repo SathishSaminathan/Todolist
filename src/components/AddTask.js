@@ -11,7 +11,9 @@ import Modal from 'react-native-modal';
 
 import TextComponent from './Shared/TextComponent';
 import TextInputComponent from './Shared/TextInputComponent';
-import {FontType} from '../constants/AppConstants';
+import {FontType, IconType} from '../constants/AppConstants';
+import IconComponent from './Shared/IconComponent';
+import {Colors} from '../constants/ThemeConstants';
 
 export default ({pic, handleAddTodo, toggleModal, handleClear, list}) => {
   const [modal, setModal] = useState(false);
@@ -41,7 +43,12 @@ export default ({pic, handleAddTodo, toggleModal, handleClear, list}) => {
             toggleModal(true);
           }}
           style={styles.ButtonAdd}>
-          <Icon name={pic} size={20} color="#1070de" />
+          <IconComponent
+            name={pic}
+            type={IconType.Feather}
+            size={30}
+            color={Colors.themeBLue}
+          />
         </TouchableOpacity>
       </View>
       <View />
@@ -71,7 +78,9 @@ export default ({pic, handleAddTodo, toggleModal, handleClear, list}) => {
               onPress={handleClear}
               style={styles.btnBottom}>
               <View style={styles.Text}>
-                <TextComponent type={FontType.BOLD} style={[
+                <TextComponent
+                  type={FontType.BOLD}
+                  style={[
                     styles.textSave,
                     {color: list.length !== 0 ? '#1070de' : 'lightgrey'},
                   ]}>
@@ -105,9 +114,9 @@ export default ({pic, handleAddTodo, toggleModal, handleClear, list}) => {
 };
 const styles = StyleSheet.create({
   ButtonAdd: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
@@ -119,7 +128,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1.43,
     shadowRadius: 19.51,
     elevation: 10,
-    marginBottom: 30,
+    marginBottom: 40,
     // position: 'absolute',
     // top: -25,
     // left:0
