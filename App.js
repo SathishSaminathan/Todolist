@@ -15,6 +15,7 @@ import {MyStack} from './src/routes/StackNavigator';
 import {StatusBar} from 'react-native';
 import {Colors} from './src/constants/ThemeConstants';
 
+// Is CN=SathishSaminathan, OU=SKTech, O=SKTech, L=Tirupur, ST=Tamilnadu, C=IN correct?
 const App = () => {
   return (
     <>
