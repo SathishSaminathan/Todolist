@@ -8,6 +8,7 @@
 
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
+import codePush from 'react-native-code-push';
 
 import Home from './src/screens/Home';
 import {MyStack} from './src/routes/StackNavigator';
@@ -24,4 +25,7 @@ const App = () => {
     </>
   );
 };
-export default App;
+
+const codePushOptions = {checkFrequency: codePush.CheckFrequency.ON_APP_START};
+// appcenter codepush release-react -a SathishSaminathan/Simple-Todo-List -d Production
+export default codePush(codePushOptions)(App);
